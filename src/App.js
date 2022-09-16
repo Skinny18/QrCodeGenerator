@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import {useState} from 'react'
 import './App.css';
+import { api, url } from './config';
 
 function App() {
+  const [id, setId] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const user = {
+      id
+    }
+    console.log(user)
+  }
+
+  const qrcode = (url + api + `${id}`)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form  onSubmit={handleSubmit} className="App">
+      <input type="text" placeholder='Seu Id' onChange={(e) => setId(e.target.value)}/>
+      <img src={qrcode}></img>
+      <p>{id}</p>
+    </form>
   );
 }
 
